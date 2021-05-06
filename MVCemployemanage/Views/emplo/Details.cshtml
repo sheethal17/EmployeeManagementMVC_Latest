@@ -1,45 +1,97 @@
-﻿@model MVCemployemanage.Models.emptable
+﻿@model IEnumerable<MVCemployemanage.Models.emptable>
 @{
-    ViewBag.Title = "details";
+    ViewBag.Title = "Details";
 }
 
-<h2>details</h2>
+<h2>Details</h2>
 
-
-
-<div>
-    <h4>emp</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<table class="table" border="1">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.first_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.lastname)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dob)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dob)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.gender)
-        </dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
+        <th></th>
+    </tr>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            </tr>
+    }
+                </table>
+    
 
-</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+
+                </p>
 

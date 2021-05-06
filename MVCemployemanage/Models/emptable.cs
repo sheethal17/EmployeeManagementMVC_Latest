@@ -39,10 +39,10 @@ namespace MVCemployemanage.Models
         public string gender { get; set; }
 
 
-
+        
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "This field is required!")]
-        [StringLength(50)]
+        [StringLength(50,MinimumLength =8,ErrorMessage ="minimum character should be 8")]
         public string password { get; set; }
 
 

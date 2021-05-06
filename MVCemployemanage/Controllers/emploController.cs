@@ -75,21 +75,7 @@ namespace MVCemployemanage.Controllers
 
 
         // GET: emplo/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            emptable emptable = db.emplo.Find(id);
-            if (emptable == null)
-            {
-                return HttpNotFound();
-            }
-         return View(emptable);
-        }
-
-        // POST: emplo/Edit/5
+               // POST: emplo/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,first_name,lastname,email,dob,gender,password,conformpassword")] emptable emptable)
@@ -142,10 +128,10 @@ namespace MVCemployemanage.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
 
-        }         
+        }
 
 
-         protected override void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -153,11 +139,46 @@ namespace MVCemployemanage.Controllers
             }
             base.Dispose(disposing);
 
-
-
-
-
-
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(emptable user)
+        {
+            var verifi = db.emplo.Where(a => a.email.Equals(user.email) && a.password.Equals(user.password)).SingleOrDefault();
+            if (verifi != null)
+            {
+
+
+                Session["User"] = user.email;
+                return RedirectToAction("Edit");
+            }
+            else
+            {
+                ViewBag.error = "Wrong Password or Email";
+                return View();
+            }
+        }
+        public ActionResult Dashboard()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+
+                return RedirectToAction("Edit");
+
+            }
+        }
+
+
+
+
+
     }
-}
+    }
